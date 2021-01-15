@@ -2,13 +2,18 @@ import 'package:flutter/cupertino.dart';
 
 import 'country.dart';
 
-class MatchInfo extends StatelessWidget {
+class MatchInfo extends StatefulWidget {
   MatchInfo({@required this.result, @required this.date, @required this.hour});
 
   final String result;
   final String date;
   final String hour;
 
+  @override
+  _MatchInfoState createState() => _MatchInfoState();
+}
+
+class _MatchInfoState extends State<MatchInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +22,7 @@ class MatchInfo extends StatelessWidget {
         children: [
           Container(
               child: Text(
-                result,
+                widget.result,
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
                     letterSpacing: 4,
@@ -28,8 +33,8 @@ class MatchInfo extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: CupertinoColors.inactiveGray),
                   borderRadius: BorderRadius.all(Radius.circular(2)))),
-          Text(date, style: TextStyle(fontSize: 14, height: 1.6)),
-          Text(hour, style: TextStyle(fontSize: 14, height: 1.6))
+          Text(widget.date, style: TextStyle(fontSize: 14, height: 1.6)),
+          Text(widget.hour, style: TextStyle(fontSize: 14, height: 1.6))
         ],
       ),
     );
@@ -45,7 +50,8 @@ class Match extends StatelessWidget {
       @required this.result,
       @required this.date,
       @required this.hour,
-      this.showOtherBets});
+      this.showOtherBets,
+      this.isEditable});
 
   final String host;
   final String guest;
@@ -54,10 +60,12 @@ class Match extends StatelessWidget {
   final String result;
   final String date;
   final String hour;
-  bool showOtherBets = false;
+  final bool showOtherBets;
+  final bool isEditable;
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(children: [
       Container(
         margin: EdgeInsets.only(top: 20, bottom: 20),
@@ -66,9 +74,9 @@ class Match extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Country(name: host, flagImg: hostFlag),
-              MatchInfo(result: result, date: date, hour: hour),
-              Country(name: guest, flagImg: guestFlag)
+              Country(name: host, flagImg: hostFlag, isEditable: isEditable),
+              isEditable ? Text("vs") : MatchInfo(result: result, date: date, hour: hour),
+              Country(name: guest, flagImg: guestFlag, isEditable: isEditable)
             ],
           ),
           this.showOtherBets ? OtherBets() : Container()

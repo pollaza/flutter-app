@@ -26,6 +26,7 @@ class Matches extends StatelessWidget {
               hour: '15:00',
               result: '1:2',
               showOtherBets: true,
+              isEditable: false,
             ),
             Positions()
           ],

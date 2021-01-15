@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'match.dart';
 
-class Bet extends StatelessWidget {
+class Bet extends StatefulWidget {
   Bet({@required this.phase});
 
   final int phase;
 
+  @override
+  _BetState createState() => _BetState();
+}
+
+class _BetState extends State<Bet> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +31,8 @@ class Bet extends StatelessWidget {
               date: '2020-10-13',
               hour: '15:00',
               result: '1:2',
-              showOtherBets: false
+              showOtherBets: false,
+              isEditable: true,
             ),
               ),
             CupertinoButton.filled(
