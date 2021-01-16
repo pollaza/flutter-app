@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pollaza/api_provider.dart';
 
 class Profile extends StatelessWidget {
 
@@ -19,10 +20,7 @@ class Profile extends StatelessWidget {
             CupertinoButton.filled(
               child: Text('Logout'),
               onPressed: () { 
-                
-                /** 
-
-                */
+                ApiProvider().logout().then((value) => { Navigator.pop(context) });
                },
             ),
           ],

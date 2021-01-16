@@ -34,6 +34,13 @@ class ApiProvider {
     }
   }
 
+  Future logout() async {
+    final request = {};
+    final response = await _dio.post('/Account/Logout', data: request);
+
+    print(response.data.toString());
+  }
+
   Future getBets() async {
     final response = await _dio.get('/Bet');
 
