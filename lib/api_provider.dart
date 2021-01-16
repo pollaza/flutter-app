@@ -49,4 +49,10 @@ class ApiProvider {
 
     print(response.data.toString());
   }
+
+  Future getScores() async{
+    final response = await _dio.get('/Phase/Results');
+    Map responseMap = jsonDecode(response.toString());
+    inspect(responseMap);
+  }
 }
