@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pollaza/api_provider.dart';
 import 'package:pollaza/profile.dart';
 import 'rankings.dart';
 import 'matches.dart';
@@ -37,7 +36,7 @@ class Home extends StatelessWidget {
             return SafeArea(child: Rankings(phase: 2));
             break;
           case 1:
-            return SafeArea(child: Matches(phase: 2));
+            return SafeArea(child: Matches());
             break;
           case 2:
             return SafeArea(child: Bet(phase: 2));
