@@ -66,9 +66,9 @@ class Match extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Container(
-        margin: EdgeInsets.only(top: 20, bottom: 20),
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(top: 10, bottom: 10),
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,15 +78,28 @@ class Match extends StatelessWidget {
               isEditable
                   ? Text("vs")
                   : MatchInfo(result: result, date: date, hour: hour),
-              Country(name: guest, flagImg: guestFlag, isEditable: isEditable)
+              Country(name: guest, flagImg: guestFlag, isEditable: isEditable),
+              this.showOtherBets
+                  ? Container(
+                      child: Icon(
+                        CupertinoIcons.chevron_forward,
+                        size: 25.0,
+                        color: Colors.blueGrey,
+                      ),
+                    )
+                  : Container()
             ],
           ),
-          this.showOtherBets ? OtherBets() : Container()
         ]),
       ),
-    ]);
+      onTap: () {
+        Navigator.of(context).pushNamed("detail");
+      },
+    );
   }
 }
+
+class FontAwesomeIcons {}
 
 class OtherBets extends StatefulWidget {
   @override
