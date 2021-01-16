@@ -35,7 +35,7 @@ class ApiProvider {
   }
 
   Future getBets() async {
-    final response = await _dio.get('/Bets');
+    final response = await _dio.get('/Bet');
 
     print(response.data.toString());
   }

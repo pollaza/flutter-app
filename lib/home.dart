@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pollaza/api_provider.dart';
 import 'package:pollaza/profile.dart';
 import 'rankings.dart';
 import 'matches.dart';
@@ -33,7 +34,16 @@ class Home extends StatelessWidget {
       tabBuilder: (BuildContext context, int index) {
         switch (index) {
           case 0:
-            return SafeArea(child: Container(child: Rankings(phase: 2)));
+            return SafeArea(
+                child: Container(
+                    child: Column(
+              children: [
+                Rankings(phase: 2),
+                CupertinoButton(
+                    child: Text('bets'),
+                    onPressed: () => ApiProvider().getBets())
+              ],
+            )));
             break;
           case 1:
             return SafeArea(child: Container(child: Matches(phase: 2)));
