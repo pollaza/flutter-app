@@ -12,7 +12,7 @@ class Matches extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Eliminatorias Conmebol - Fase $phase',
+              "Resultados - "+this.phase.toString(),
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
             Match(

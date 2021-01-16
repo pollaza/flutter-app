@@ -31,7 +31,7 @@ class _RankingsState extends State<Rankings> {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Posiciones",style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+            Text("Posiciones - "+widget.phase.toString(),style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
             Container(
               padding: EdgeInsets.all(12.0),
               child: Table(
