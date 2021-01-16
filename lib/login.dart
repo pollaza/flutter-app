@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'api_provider.dart';
+import 'globals.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,9 +19,17 @@ class _LoginState extends State<Login> {
 
     ApiProvider()
         .login(username, password)
-        .then((_) => Navigator.pushNamed(context, 'home'))
+        .then((response) => {
+              if (response["isSuccess"])
+                {
+                  Globals.username = response["user"]["email"],
+                  Globals.isLoggedIn = true,
+                  Navigator.pushNamed(context, 'home')
+                }
+              else
+                {print("Login error")}
+            })
         .catchError((err) => print(err));
-    // print('login attempt: $username with $password');
   }
 
   @override

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 class ApiProvider {
@@ -25,20 +28,20 @@ class ApiProvider {
     final request = {"username": username, "password": password};
     final response = await _dio.post('/Account/Login', data: request);
     final cookies = response.headers.map['set-cookie'];
-
+    Map responseMap = jsonDecode(response.toString());
+    
+    print(responseMap["user"]["email"]);
     if (cookies.isNotEmpty) {
       final authToken = cookies[0].split(';')[0];
 
       aToken = authToken;
       print('token: $aToken');
     }
+    return responseMap;
   }
 
   Future logout() async {
-    final request = {};
-    final response = await _dio.post('/Account/Logout', data: request);
-
-    print(response.data.toString());
+    return await _dio.post('/Account/Logout');
   }
 
   Future getBets() async {
