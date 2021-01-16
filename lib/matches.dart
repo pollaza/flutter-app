@@ -1,29 +1,42 @@
+
+
+import 'dart:developer';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pollaza/api_provider.dart';
 import 'match.dart';
 
 class Matches extends StatefulWidget {
-  Matches({@required this.phase});
-  final int phase;
+  Matches();
 
   @override
   _MatchesState createState() => _MatchesState();
 }
 
-class _MatchesState extends State<Matches> {
+class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches>{
+
+  String phase = "";
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    ApiProvider().getScores().then((response) => {
+        setState(() {
+          phase = response["phase"]["title"].toString();
+          inspect(response);
+        })
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
-
-    ApiProvider().getScores().then((value) => {
-              print("response")
-    });
-
+    
     return Container(
         margin: EdgeInsets.all(14),
         child: Column(
           children: [
             Text(
-              "Resultados - "+this.widget.phase.toString(),
+              "Resultados - "+phase,
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
             Match(
@@ -38,33 +51,8 @@ class _MatchesState extends State<Matches> {
               result: '1:2',
               showOtherBets: true,
               isEditable: false,
-            ),
-            Positions()
+            )
           ],
         ));
   }
 }
-
-class Positions extends StatefulWidget {
-  @override
-  _PositionsState createState() => _PositionsState();
-}
-
-class _PositionsState extends State<Positions> {
-  
-
-  @override
-  void initState() {
-    super.initState();
-    
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
-
-
