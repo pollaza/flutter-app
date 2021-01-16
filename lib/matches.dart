@@ -1,18 +1,29 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pollaza/api_provider.dart';
 import 'match.dart';
 
-class Matches extends StatelessWidget {
+class Matches extends StatefulWidget {
   Matches({@required this.phase});
   final int phase;
 
   @override
+  _MatchesState createState() => _MatchesState();
+}
+
+class _MatchesState extends State<Matches> {
+  @override
   Widget build(BuildContext context) {
+
+    ApiProvider().getScores().then((value) => {
+              print("response")
+    });
+
     return Container(
         margin: EdgeInsets.all(14),
         child: Column(
           children: [
             Text(
-              "Resultados - "+this.phase.toString(),
+              "Resultados - "+this.widget.phase.toString(),
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
             ),
             Match(
