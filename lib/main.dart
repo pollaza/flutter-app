@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'home.dart';
 import 'login.dart';
+import 'match_detail.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +10,8 @@ void main() {
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     'login': (context) => Login(),
-    'home': (context) => Home()
+    'home': (context) => Home(),
+    'detail': (context) => MatchDetail()
   };
 
   @override
