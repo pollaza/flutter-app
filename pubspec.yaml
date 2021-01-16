@@ -23,6 +23,7 @@ environment:
 dependencies:
   http: ^0.12.2
   dio: ^3.0.10
+  after_layout: ^1.0.7
   flutter:
     sdk: flutter
   flutter_number_picker:

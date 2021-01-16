@@ -34,30 +34,19 @@ class Home extends StatelessWidget {
       tabBuilder: (BuildContext context, int index) {
         switch (index) {
           case 0:
-            return SafeArea(
-                child: Container(
-                    child: Column(
-              children: [
-                Rankings(phase: 2),
-                CupertinoButton(
-                    child: Text('bets'),
-                    onPressed: () => ApiProvider().getBets())
-              ],
-            )));
+            return SafeArea(child: Rankings(phase: 2));
             break;
           case 1:
-            return SafeArea(child: Container(child: Matches(phase: 2)));
+            return SafeArea(child: Matches(phase: 2));
             break;
           case 2:
-            return SafeArea(child: Container(child: Bet(phase: 2)));
+            return SafeArea(child: Bet(phase: 2));
             break;
           case 3:
-            return SafeArea(child: Container(child: Profile()));
+            return SafeArea(child: Profile());
             break;
           default:
-            return SafeArea(
-              child: Text('LOL'),
-            );
+            return null;
         }
       },
     ));

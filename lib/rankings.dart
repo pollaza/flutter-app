@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:after_layout/after_layout.dart';
 
 class Rankings extends StatefulWidget {
   Rankings({@required this.phase});
@@ -10,43 +10,68 @@ class Rankings extends StatefulWidget {
   _RankingsState createState() => _RankingsState();
 }
 
-class _RankingsState extends State<Rankings> {
+class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
+  @override
+  void afterFirstLayout(BuildContext context) {
+    // call method
+  }
+
   @override
   Widget build(BuildContext context) {
     int count = 1;
-    
+
     var data = [
-      {'name': "German", 'res': "1",'mar': "2",'puntos': "3"},
-      {'name': "Santi", 'res': "0",'mar': "2",'puntos': "2"},
-      {'name': "Jose", 'res': "0",'mar': "0",'puntos': "1"}
+      {'name': "German", 'res': "1", 'mar': "2", 'puntos': "3"},
+      {'name': "Santi", 'res': "0", 'mar': "2", 'puntos': "2"},
+      {'name': "Jose", 'res': "0", 'mar': "0", 'puntos': "1"}
     ];
 
-    List<TableRow> rows = [TableRow(children: [Text(" "),Text("Nombre",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),Text("R",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),Text("M",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),Text("Puntos",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))])];
-    for (var result in data){
-      rows.add(TableRow(children: [Text((count++).toString()),Text(result["name"]),new Text(result["res"]),new Text(result["mar"]),new Text(result["puntos"])]));
+    List<TableRow> rows = [
+      TableRow(children: [
+        Text(" "),
+        Text("Nombre",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text("R", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text("M", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text("Puntos",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+      ])
+    ];
+    for (var result in data) {
+      rows.add(TableRow(children: [
+        Text((count++).toString()),
+        Text(result["name"]),
+        new Text(result["res"]),
+        new Text(result["mar"]),
+        new Text(result["puntos"])
+      ]));
     }
 
     return Container(
-      margin: EdgeInsets.all(14),
-      child: Column(
+        margin: EdgeInsets.all(14),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Posiciones - "+widget.phase.toString(),style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+            Text("Posiciones - " + widget.phase.toString(),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
             Container(
               padding: EdgeInsets.all(12.0),
               child: Table(
                 children: rows,
-                border: TableBorder(horizontalInside: BorderSide(width: 1, color: Colors.blue, style: BorderStyle.solid)),
+                border: TableBorder(
+                    horizontalInside: BorderSide(
+                        width: 1,
+                        color: CupertinoColors.activeBlue,
+                        style: BorderStyle.solid)),
                 columnWidths: Map.from({
                   0: FixedColumnWidth(20),
                   1: FixedColumnWidth(150),
                   2: FixedColumnWidth(50),
                   3: FixedColumnWidth(50),
                 }),
-                ),
+              ),
             ),
           ],
-        )
-    );
+        ));
   }
 }
