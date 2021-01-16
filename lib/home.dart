@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
             return SafeArea(child: Rankings(phase: 2));
             break;
           case 1:
-            return SafeArea(child: Matches(phase: 2));
+            return SafeArea(child: Matches());
             break;
           case 2:
             return SafeArea(child: Bet(phase: 2));
