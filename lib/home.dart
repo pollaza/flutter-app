@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pollaza/api_provider.dart';
 import 'package:pollaza/profile.dart';
 import 'rankings.dart';
 import 'matches.dart';

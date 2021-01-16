@@ -24,15 +24,17 @@ class _CountryState extends State<Country> {
               Text(widget.name,
                   style: TextStyle(height: 1.5, fontWeight: FontWeight.w500)),
               Image.network(widget.flagImg),
-              widget.isEditable ? CustomNumberPicker(
-                initialValue: 0,
-                maxValue: 100,
-                minValue: 0,
-                step: 1,
-                onValue: (value) {
-                  print(value.toString());
-                },
-            ): Container()
+              widget.isEditable
+                  ? CustomNumberPicker(
+                      initialValue: 0,
+                      maxValue: 100,
+                      minValue: 0,
+                      step: 1,
+                      onValue: (value) {
+                        print(value.toString());
+                      },
+                    )
+                  : Container()
             ]));
   }
 }

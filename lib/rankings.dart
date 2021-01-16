@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:after_layout/after_layout.dart';
+import 'api_provider.dart';
 
 class Rankings extends StatefulWidget {
   Rankings({@required this.phase});
@@ -11,20 +12,34 @@ class Rankings extends StatefulWidget {
 }
 
 class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
+  var positions = [];
+
   @override
   void afterFirstLayout(BuildContext context) {
-    // call method
+    ApiProvider().getRanking().then((ranking) => setState(() {
+          print(positions);
+          positions = ranking['scores'];
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
     int count = 1;
 
-    var data = [
-      {'name': "German", 'res': "1", 'mar': "2", 'puntos': "3"},
-      {'name': "Santi", 'res': "0", 'mar': "2", 'puntos': "2"},
-      {'name': "Jose", 'res': "0", 'mar': "0", 'puntos': "1"}
-    ];
+    var data = positions.map((user) => {
+          'name': user['user']['fullName'],
+          'res': user['winner'].toString(),
+          'mar': user['score'].toString(),
+          'puntos': user['total'].toString()
+        });
+
+    print('data xd $data');
+
+    // var data = [
+    //   {'name': "German", 'res': "1", 'mar': "2", 'puntos': "3"},
+    //   {'name': "Santi", 'res': "0", 'mar': "2", 'puntos': "2"},
+    //   {'name': "Jose", 'res': "0", 'mar': "0", 'puntos': "1"}
+    // ];
 
     List<TableRow> rows = [
       TableRow(children: [
@@ -64,10 +79,11 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
                         color: CupertinoColors.activeBlue,
                         style: BorderStyle.solid)),
                 columnWidths: Map.from({
-                  0: FixedColumnWidth(20),
-                  1: FixedColumnWidth(150),
-                  2: FixedColumnWidth(50),
-                  3: FixedColumnWidth(50),
+                  0: FractionColumnWidth(0.1),
+                  1: FractionColumnWidth(0.5),
+                  2: FractionColumnWidth(0.1),
+                  3: FractionColumnWidth(0.1),
+                  4: FractionColumnWidth(0.2)
                 }),
               ),
             ),

@@ -66,7 +66,6 @@ class Match extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(children: [
       Container(
         margin: EdgeInsets.only(top: 20, bottom: 20),
@@ -76,7 +75,9 @@ class Match extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Country(name: host, flagImg: hostFlag, isEditable: isEditable),
-              isEditable ? Text("vs") : MatchInfo(result: result, date: date, hour: hour),
+              isEditable
+                  ? Text("vs")
+                  : MatchInfo(result: result, date: date, hour: hour),
               Country(name: guest, flagImg: guestFlag, isEditable: isEditable)
             ],
           ),
@@ -86,6 +87,7 @@ class Match extends StatelessWidget {
     ]);
   }
 }
+
 class OtherBets extends StatefulWidget {
   @override
   _BetsState createState() => _BetsState();
@@ -102,18 +104,27 @@ class _BetsState extends State<OtherBets> {
 
   @override
   Widget build(BuildContext context) {
-    
     var data = [
-      {'name': "German", 'team1': "1",'team2': "1"},
-      {'name': "Santi", 'team1': "0",'team2': "0"},
-      {'name': "Jose", 'team1': "1",'team2': "2"}
+      {'name': "German", 'team1': "1", 'team2': "1"},
+      {'name': "Santi", 'team1': "0", 'team2': "0"},
+      {'name': "Jose", 'team1': "1", 'team2': "2"}
     ];
 
-    List<TableRow> rows = [TableRow(children: [Text("Nombre",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),Text("Marcador",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))])];
-    for (var result in data){
-      rows.add(TableRow(children: [Text(result["name"]),new Text(result["team1"] +":"+result["team2"])]));
+    List<TableRow> rows = [
+      TableRow(children: [
+        Text("Nombre",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        Text("Marcador",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
+      ])
+    ];
+    for (var result in data) {
+      rows.add(TableRow(children: [
+        Text(result["name"]),
+        new Text(result["team1"] + ":" + result["team2"])
+      ]));
     }
-    
+
     return Container(
       margin: EdgeInsets.only(top: 14),
       child: Column(
@@ -132,16 +143,18 @@ class _BetsState extends State<OtherBets> {
               ),
               onPressed: toggle),
           Container(
-            child: isExpanded ? 
-             Table(
-                children: rows,
-                border: TableBorder(horizontalInside: BorderSide(width: 1, color: Colors.blue, style: BorderStyle.solid)),
-                columnWidths: Map.from({
-                  0: FixedColumnWidth(150),
-                  1: FixedColumnWidth(150)
-                }),
-                )
-             : Text(''),
+            child: isExpanded
+                ? Table(
+                    children: rows,
+                    border: TableBorder(
+                        horizontalInside: BorderSide(
+                            width: 1,
+                            color: Colors.blue,
+                            style: BorderStyle.solid)),
+                    columnWidths: Map.from(
+                        {0: FixedColumnWidth(150), 1: FixedColumnWidth(150)}),
+                  )
+                : null,
           )
         ],
       ),
