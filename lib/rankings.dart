@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:after_layout/after_layout.dart';
+import 'package:flutter/material.dart';
 import 'api_provider.dart';
+import 'drawer.dart';
 
 class Rankings extends StatefulWidget {
   Rankings({@required this.phase});
@@ -61,33 +63,36 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
         new Text(result["puntos"])
       ]));
     }
-
-    return Container(
-        margin: EdgeInsets.all(14),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("Posiciones - Fase " + widget.phase.toString(),
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
-            Container(
-              padding: EdgeInsets.all(12.0),
-              child: Table(
-                children: rows,
-                border: TableBorder(
-                    horizontalInside: BorderSide(
-                        width: 1,
-                        color: CupertinoColors.activeBlue,
-                        style: BorderStyle.solid)),
-                columnWidths: Map.from({
-                  0: FractionColumnWidth(0.1),
-                  1: FractionColumnWidth(0.5),
-                  2: FractionColumnWidth(0.1),
-                  3: FractionColumnWidth(0.1),
-                  4: FractionColumnWidth(0.2)
-                }),
-              ),
-            ),
-          ],
-        ));
+    return new Scaffold(
+        drawer: new MyDrawer(),
+        appBar: AppBar(title: Text("Posiciones")),
+        body: new Container(
+            margin: EdgeInsets.all(14),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text("Fase " + widget.phase.toString(),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+                Container(
+                  padding: EdgeInsets.all(12.0),
+                  child: Table(
+                    children: rows,
+                    border: TableBorder(
+                        horizontalInside: BorderSide(
+                            width: 1,
+                            color: CupertinoColors.activeBlue,
+                            style: BorderStyle.solid)),
+                    columnWidths: Map.from({
+                      0: FractionColumnWidth(0.1),
+                      1: FractionColumnWidth(0.5),
+                      2: FractionColumnWidth(0.1),
+                      3: FractionColumnWidth(0.1),
+                      4: FractionColumnWidth(0.2)
+                    }),
+                  ),
+                ),
+              ],
+            )));
   }
 }

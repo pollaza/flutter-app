@@ -1,8 +1,14 @@
+import 'dart:developer';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pollaza/api_provider.dart';
+import 'drawer.dart';
 import 'match.dart';
 import 'package:intl/intl.dart';
+
+import 'match_detail.dart';
 
 class Matches extends StatefulWidget {
   Matches();
@@ -14,10 +20,10 @@ class Matches extends StatefulWidget {
 class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
   String phase = "";
   var matches = [];
+  final routes = <String, WidgetBuilder>{'detail': (context) => MatchDetail()};
 
   @override
   void afterFirstLayout(BuildContext context) {
-    print("Getting scores...");
     ApiProvider().getScores().then((response) => setState(() {
           phase = response["phase"]["title"].toString();
           matches = response["matches"];
@@ -28,7 +34,6 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
   Widget build(BuildContext context) {
     List<Match> rows = new List<Match>();
     for (var match in matches) {
-      bool isClosed = match["closematch"] == "true";
       rows.add(Match(
           host: match["team1"]["title"].toString(),
           guest: match["team2"]["title"].toString(),
@@ -40,9 +45,12 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
           date: DateFormat('yyyy-MM-dd').format(DateTime.parse(match["date"])),
           hour:
               DateFormat(r'''HH'h'mm''').format(DateTime.parse(match["date"])),
-          showOtherBets: isClosed,
+          showOtherBets: match["closed"],
           isEditable: false));
     }
-    return ListView(children: rows);
+    return new Scaffold(
+        drawer: new MyDrawer(),
+        appBar: AppBar(title: Text("Resultados")),
+        body: new ListView(children: rows));
   }
 }
