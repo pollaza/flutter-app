@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
@@ -50,12 +49,12 @@ class ApiProvider {
     print(response.data.toString());
   }
 
-  Future getScores() async {
+  Future<Map> getScores() async {
     final response = await _dio.get('/Phase/Results');
     return jsonDecode(response.toString());
   }
 
-  Future getRanking() async {
+  Future<Map> getRanking() async {
     final response = await _dio.get('/Phase/ScoreBoard');
     return jsonDecode(response.toString());
   }
