@@ -26,6 +26,7 @@ class _BetState extends State<Bet> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.7,
                   child: Match(
+                    id: "123",
                     host: 'Bolivia',
                     guest: 'Argentina',
                     hostFlag:
@@ -35,6 +36,7 @@ class _BetState extends State<Bet> {
                     date: '2020-10-13',
                     hour: '15:00',
                     result: '1:2',
+                    predictions: [],
                     showOtherBets: false,
                     isEditable: true,
                   ),
