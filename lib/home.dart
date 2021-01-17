@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pollaza/match_detail.dart';
 import 'package:pollaza/profile.dart';
 import 'rankings.dart';
 import 'matches.dart';
@@ -14,9 +15,9 @@ class Home extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/rankings": (BuildContext context) => new Rankings(phase: 2),
         "/matches": (BuildContext context) => new Matches(),
-        "/bet": (BuildContext context) => new Bet(),
+        "/bet": (BuildContext context) => new Bet(phase: 2),
         "/profile": (BuildContext context) => new Profile(),
-        //"/detail": (BuildContext context) => new DetailPage(),
+        "/matches/detail": (BuildContext context) => new MatchDetail(),
       },
       initialRoute: "/rankings",
       title: 'Nav',
