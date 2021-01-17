@@ -14,35 +14,35 @@ class _BetState extends State<Bet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(14),
-      child: Column(
+        margin: EdgeInsets.all(14),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Apuestas",style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
+            Text("Apuestas",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
             Container(
-                height: MediaQuery.of(context).size.height*0.7,
-                child: Match(
-              host: 'Bolivia',
-              guest: 'Argentina',
-              hostFlag:
-                  'http://ssl.gstatic.com/onebox/media/sports/logos/SGxeD7yhwPj53FmPBmMMHg_48x48.png',
-              guestFlag:
-                  'http://ssl.gstatic.com/onebox/media/sports/logos/1xBWyjjkA6vEWopPK3lIPA_48x48.png',
-              date: '2020-10-13',
-              hour: '15:00',
-              result: '1:2',
-              showOtherBets: false,
-              isEditable: true,
-            ),
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Match(
+                host: 'Bolivia',
+                guest: 'Argentina',
+                hostFlag:
+                    'ssl.gstatic.com/onebox/media/sports/logos/SGxeD7yhwPj53FmPBmMMHg_48x48.png',
+                guestFlag:
+                    'ssl.gstatic.com/onebox/media/sports/logos/1xBWyjjkA6vEWopPK3lIPA_48x48.png',
+                date: '2020-10-13',
+                hour: '15:00',
+                result: '1:2',
+                showOtherBets: false,
+                isEditable: true,
               ),
+            ),
             CupertinoButton.filled(
               child: Text('Apostar'),
-              onPressed: () { 
+              onPressed: () {
                 /** Save Bets Action */
-               },
+              },
             ),
           ],
-        )
-    );
+        ));
   }
 }

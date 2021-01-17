@@ -23,7 +23,7 @@ class _CountryState extends State<Country> {
             children: [
               Text(widget.name,
                   style: TextStyle(height: 1.5, fontWeight: FontWeight.w500)),
-              Image.network("http:" + widget.flagImg),
+              Image.network("http://" + widget.flagImg),
               widget.isEditable
                   ? CustomNumberPicker(
                       initialValue: 0,
