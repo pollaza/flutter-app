@@ -1,46 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'match_info.dart';
 import 'country.dart';
-
-class MatchInfo extends StatefulWidget {
-  MatchInfo({@required this.result, @required this.date, @required this.hour});
-
-  final String result;
-  final String date;
-  final String hour;
-
-  @override
-  _MatchInfoState createState() => _MatchInfoState();
-}
-
-class _MatchInfoState extends State<MatchInfo> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 140,
-      child: Column(
-        children: [
-          Container(
-              child: Text(
-                widget.result,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 4,
-                    fontSize: 18),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              margin: EdgeInsets.only(bottom: 6),
-              decoration: BoxDecoration(
-                  border: Border.all(color: CupertinoColors.inactiveGray),
-                  borderRadius: BorderRadius.all(Radius.circular(2)))),
-          Text(widget.date, style: TextStyle(fontSize: 14, height: 1.6)),
-          Text(widget.hour, style: TextStyle(fontSize: 14, height: 1.6))
-        ],
-      ),
-    );
-  }
-}
 
 class Match extends StatelessWidget {
   Match(
@@ -68,7 +29,8 @@ class Match extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(top: 10, bottom: 10),
+        color: CupertinoColors.extraLightBackgroundGray,
+        padding: EdgeInsets.only(top: 10, bottom: 10),
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
