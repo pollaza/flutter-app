@@ -52,7 +52,7 @@ class Match extends StatelessWidget {
                     onTap: () {
                       print("Tapped on match");
                       //Got to detail page
-                      Navigator.of(context).pushNamed("detail");
+                      Navigator.of(context).pushNamed("/matches/detail");
                     },
                   )
                 : Container()

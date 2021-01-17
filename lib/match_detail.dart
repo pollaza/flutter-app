@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MatchDetail extends StatefulWidget {
   @override
@@ -8,6 +9,11 @@ class MatchDetail extends StatefulWidget {
 class _MatchDetailState extends State<MatchDetail> {
   @override
   Widget build(BuildContext context) {
-    return Text("Detail");
+    return new Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white10,
+          title: Text("Details"),
+        ),
+        body: new Text("Match Detail"));
   }
 }

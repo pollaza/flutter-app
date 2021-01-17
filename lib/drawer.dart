@@ -10,8 +10,18 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Drawer(
       child: new ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.only(top: 100, left: 20),
         children: <Widget>[
+          new ListTile(
+            title: new Text(
+              'Menu',
+              style: new TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              // change app state...
+              _gotoPage("/rankings", context);
+            },
+          ),
           new ListTile(
             leading: new Icon(CupertinoIcons.list_number),
             title: new Text('Posiciones'),
@@ -21,7 +31,7 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           new ListTile(
-            leading: new Icon(CupertinoIcons.bars),
+            leading: new Icon(Icons.info_outline_rounded),
             title: new Text('Resultados'),
             onTap: () {
               // change app state...

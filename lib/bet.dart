@@ -40,7 +40,7 @@ class _BetState extends State<Bet> {
                   ),
                 ),
                 CupertinoButton.filled(
-                  child: Text('Apostar'),
+                  child: Text('Guardar'),
                   onPressed: () {
                     /** Save Bets Action */
                   },
