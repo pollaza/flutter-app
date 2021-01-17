@@ -28,7 +28,7 @@ class Match extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: CupertinoColors.extraLightBackgroundGray,
+      //color: CupertinoColors.extraLightBackgroundGray,
       padding: EdgeInsets.only(top: 10, bottom: 10),
       child: Column(children: [
         Row(
@@ -40,7 +40,7 @@ class Match extends StatelessWidget {
                 ? Text("vs")
                 : MatchInfo(result: result, date: date, hour: hour),
             Country(name: guest, flagImg: guestFlag, isEditable: isEditable),
-            !this.showOtherBets
+            this.showOtherBets
                 ? GestureDetector(
                     child: Container(
                       child: Icon(
@@ -52,7 +52,7 @@ class Match extends StatelessWidget {
                     onTap: () {
                       print("Tapped on match");
                       //Got to detail page
-                      //Navigator.of(context).pushNamed("detail");
+                      Navigator.of(context).pushNamed("detail");
                     },
                   )
                 : Container()
