@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pollaza/api_provider.dart';
@@ -15,46 +13,36 @@ class Matches extends StatefulWidget {
 
 class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
   String phase = "";
-  List<Widget> matches = new List<Widget>();
+  var matches = [];
 
   @override
   void afterFirstLayout(BuildContext context) {
     print("Getting scores...");
-    ApiProvider().getScores().then((response) => {
-          setState(() {
-            phase = response["phase"]["title"].toString();
-            for (var m in response["matches"]) {
-              bool isClosed = m["closed"] == "true";
-              matches.add(Match(
-                  host: m["team1"]["title"].toString(),
-                  guest: m["team2"]["title"].toString(),
-                  hostFlag: m["team1"]["flag"].toString(),
-                  guestFlag: m["team2"]["flag"].toString(),
-                  result: m["team1Score"].toString() +
-                      ":" +
-                      m["team2Score"].toString(),
-                  date: DateFormat('yyyy-MM-dd')
-                      .format(DateTime.parse(m["date"])),
-                  hour: DateFormat(r'''HH'h'mm''')
-                      .format(DateTime.parse(m["date"])),
-                  showOtherBets: isClosed,
-                  isEditable: false));
-            }
-          })
-        });
+    ApiProvider().getScores().then((response) => setState(() {
+          phase = response["phase"]["title"].toString();
+          matches = response["matches"];
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: matches);
-    // return Container(
-    //     margin: EdgeInsets.all(14),
-    //     child: Column(children: [
-    //       Text(
-    //         "Resultados - " + phase,
-    //         style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-    //       ),
-    //       ListView(children: matches)
-    //     ]));
+    List<Match> rows = new List<Match>();
+    for (var match in matches) {
+      bool isClosed = match["closematch"] == "true";
+      rows.add(Match(
+          host: match["team1"]["title"].toString(),
+          guest: match["team2"]["title"].toString(),
+          hostFlag: match["team1"]["flag"].toString(),
+          guestFlag: match["team2"]["flag"].toString(),
+          result: match["team1Score"].toString() +
+              ":" +
+              match["team2Score"].toString(),
+          date: DateFormat('yyyy-MM-dd').format(DateTime.parse(match["date"])),
+          hour:
+              DateFormat(r'''HH'h'mm''').format(DateTime.parse(match["date"])),
+          showOtherBets: isClosed,
+          isEditable: false));
+    }
+    return ListView(children: rows);
   }
 }

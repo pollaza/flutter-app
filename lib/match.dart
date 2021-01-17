@@ -27,36 +27,38 @@ class Match extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        color: CupertinoColors.extraLightBackgroundGray,
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Country(name: host, flagImg: hostFlag, isEditable: isEditable),
-              isEditable
-                  ? Text("vs")
-                  : MatchInfo(result: result, date: date, hour: hour),
-              Country(name: guest, flagImg: guestFlag, isEditable: isEditable),
-              this.showOtherBets
-                  ? Container(
+    return Container(
+      color: CupertinoColors.extraLightBackgroundGray,
+      padding: EdgeInsets.only(top: 10, bottom: 10),
+      child: Column(children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Country(name: host, flagImg: hostFlag, isEditable: isEditable),
+            isEditable
+                ? Text("vs")
+                : MatchInfo(result: result, date: date, hour: hour),
+            Country(name: guest, flagImg: guestFlag, isEditable: isEditable),
+            !this.showOtherBets
+                ? GestureDetector(
+                    child: Container(
                       child: Icon(
                         CupertinoIcons.chevron_forward,
                         size: 25.0,
                         color: Colors.blueGrey,
                       ),
-                    )
-                  : Container()
-            ],
-          ),
-        ]),
-      ),
-      onTap: () {
-        Navigator.of(context).pushNamed("detail");
-      },
+                    ),
+                    onTap: () {
+                      print("Tapped on match");
+                      //Got to detail page
+                      //Navigator.of(context).pushNamed("detail");
+                    },
+                  )
+                : Container()
+          ],
+        ),
+      ]),
     );
   }
 }
