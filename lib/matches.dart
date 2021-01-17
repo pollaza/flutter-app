@@ -8,8 +8,6 @@ import 'drawer.dart';
 import 'match.dart';
 import 'package:intl/intl.dart';
 
-import 'match_detail.dart';
-
 class Matches extends StatefulWidget {
   Matches();
 
@@ -20,13 +18,14 @@ class Matches extends StatefulWidget {
 class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
   String phase = "";
   var matches = [];
-  final routes = <String, WidgetBuilder>{'detail': (context) => MatchDetail()};
+  var predictions = [];
 
   @override
   void afterFirstLayout(BuildContext context) {
     ApiProvider().getScores().then((response) => setState(() {
           phase = response["phase"]["title"].toString();
           matches = response["matches"];
+          predictions = response["userScores"];
         }));
   }
 
@@ -35,6 +34,7 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
     List<Match> rows = new List<Match>();
     for (var match in matches) {
       rows.add(Match(
+          id: match["sys"]["id"].toString(),
           host: match["team1"]["title"].toString(),
           guest: match["team2"]["title"].toString(),
           hostFlag: match["team1"]["flag"].toString(),
@@ -45,6 +45,7 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
           date: DateFormat('yyyy-MM-dd').format(DateTime.parse(match["date"])),
           hour:
               DateFormat(r'''HH'h'mm''').format(DateTime.parse(match["date"])),
+          predictions: predictions,
           showOtherBets: match["closed"],
           isEditable: false));
     }

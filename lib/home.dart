@@ -16,8 +16,7 @@ class Home extends StatelessWidget {
         "/rankings": (BuildContext context) => new Rankings(phase: 2),
         "/matches": (BuildContext context) => new Matches(),
         "/bet": (BuildContext context) => new Bet(phase: 2),
-        "/profile": (BuildContext context) => new Profile(),
-        "/matches/detail": (BuildContext context) => new MatchDetail(),
+        "/profile": (BuildContext context) => new Profile()
       },
       initialRoute: "/rankings",
       title: 'Nav',
