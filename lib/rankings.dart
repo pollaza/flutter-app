@@ -33,7 +33,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
           'puntos': user['total'].toString()
         });
 
-    print('data xd $data');
+    //print('data xd $data');
 
     // var data = [
     //   {'name': "German", 'res': "1", 'mar': "2", 'puntos': "3"},
@@ -67,7 +67,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("Posiciones - " + widget.phase.toString(),
+            Text("Posiciones - Fase " + widget.phase.toString(),
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20)),
             Container(
               padding: EdgeInsets.all(12.0),

@@ -19,6 +19,7 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
 
   @override
   void afterFirstLayout(BuildContext context) {
+    print("Getting scores...");
     ApiProvider().getScores().then((response) => {
           setState(() {
             phase = response["phase"]["title"].toString();

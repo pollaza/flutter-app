@@ -26,9 +26,9 @@ class _BetState extends State<Bet> {
                 host: 'Bolivia',
                 guest: 'Argentina',
                 hostFlag:
-                    'ssl.gstatic.com/onebox/media/sports/logos/SGxeD7yhwPj53FmPBmMMHg_48x48.png',
+                    '//ssl.gstatic.com/onebox/media/sports/logos/SGxeD7yhwPj53FmPBmMMHg_48x48.png',
                 guestFlag:
-                    'ssl.gstatic.com/onebox/media/sports/logos/1xBWyjjkA6vEWopPK3lIPA_48x48.png',
+                    '//ssl.gstatic.com/onebox/media/sports/logos/1xBWyjjkA6vEWopPK3lIPA_48x48.png',
                 date: '2020-10-13',
                 hour: '15:00',
                 result: '1:2',

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
@@ -51,8 +52,7 @@ class ApiProvider {
 
   Future getScores() async {
     final response = await _dio.get('/Phase/Results');
-    Map responseMap = jsonDecode(response.toString());
-    // inspect(responseMap);
+    return jsonDecode(response.toString());
   }
 
   Future getRanking() async {
