@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:ots/ots.dart';
+import 'package:pollaza/globals.dart';
 import 'home.dart';
 import 'login.dart';
 
@@ -14,10 +17,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
-      title: 'Pollaza',
-      routes: routes,
-      home: Login(),
-    );
+    Globals.rootContext = context;
+    return OTS(
+        loader: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
+          backgroundColor: Colors.grey,
+        ),
+        child: CupertinoApp(
+          title: 'Pollaza',
+          routes: routes,
+          home: Login(),
+        ));
   }
 }

@@ -1,6 +1,7 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ots/ots.dart';
 import 'package:pollaza/api_provider.dart';
 import 'drawer.dart';
 import 'match.dart';
@@ -20,6 +21,7 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
 
   @override
   void afterFirstLayout(BuildContext context) {
+    showLoader(isModal: true);
     ApiProvider().getScores().then((response) => setState(() {
           phase = response["phase"]["title"].toString();
           matches = response["matches"];
@@ -47,6 +49,7 @@ class _MatchesState extends State<Matches> with AfterLayoutMixin<Matches> {
           showOtherBets: match["closed"],
           isEditable: false));
     }
+    hideLoader();
     return new Scaffold(
         drawer: new MyDrawer(),
         appBar: AppBar(title: Text("Resultados")),

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pollaza/api_provider.dart';
-
 import 'drawer.dart';
 import 'globals.dart';
 
@@ -19,16 +17,6 @@ class Profile extends StatelessWidget {
                 Container(
                     height: MediaQuery.of(context).size.height * 0.75,
                     child: Center(child: Text("Nombre: " + Globals.username))),
-                CupertinoButton.filled(
-                  child: Text('Logout'),
-                  onPressed: () {
-                    ApiProvider().logout().then((value) => {
-                          Globals.isLoggedIn = false,
-                          Globals.username = "",
-                          Navigator.pop(context)
-                        });
-                  },
-                ),
               ],
             )));
   }
