@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_number_picker/flutter_number_picker.dart';
 
 class Country extends StatefulWidget {
-  Country({@required this.name, @required this.flagImg, this.isEditable});
+  Country(
+      {@required this.name,
+      @required this.flagImg,
+      @required this.isEditable,
+      @required this.score});
 
   final String name;
   final String flagImg;
   final bool isEditable;
+  final int score;
 
   @override
   _CountryState createState() => _CountryState();
@@ -26,7 +31,7 @@ class _CountryState extends State<Country> {
                   style: TextStyle(height: 1.5, fontWeight: FontWeight.w500)),
               widget.isEditable
                   ? CustomNumberPicker(
-                      initialValue: 0,
+                      initialValue: widget.score,
                       maxValue: 100,
                       minValue: 0,
                       step: 1,

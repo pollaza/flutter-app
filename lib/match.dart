@@ -39,11 +39,19 @@ class Match extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Country(name: host, flagImg: hostFlag, isEditable: isEditable),
+            Country(
+                name: host,
+                flagImg: hostFlag,
+                isEditable: isEditable,
+                score: int.parse(result.split(":").first)),
             isEditable
                 ? Text("vs")
                 : MatchInfo(result: result, date: date, hour: hour),
-            Country(name: guest, flagImg: guestFlag, isEditable: isEditable),
+            Country(
+                name: guest,
+                flagImg: guestFlag,
+                isEditable: isEditable,
+                score: int.parse(result.split(":").last)),
             this.showOtherBets
                 ? GestureDetector(
                     child: Container(
@@ -68,27 +76,5 @@ class Match extends StatelessWidget {
         ),
       ]),
     );
-  }
-}
-
-class FontAwesomeIcons {}
-
-class OtherBets extends StatefulWidget {
-  @override
-  _BetsState createState() => _BetsState();
-}
-
-class _BetsState extends State<OtherBets> {
-  bool isExpanded = false;
-
-  toggle() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

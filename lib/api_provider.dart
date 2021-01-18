@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
@@ -45,8 +46,8 @@ class ApiProvider {
 
   Future getBets() async {
     final response = await _dio.get('/Bet');
-
-    print(response.data.toString());
+    var data = jsonDecode(response.toString());
+    return data;
   }
 
   Future<Map> getScores() async {
