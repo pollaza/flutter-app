@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollaza/match_detail.dart';
+import 'globals.dart';
 import 'match_info.dart';
 import 'country.dart';
 
@@ -16,9 +17,11 @@ class Match extends StatelessWidget {
       @required this.hour,
       @required this.predictions,
       this.showOtherBets,
-      this.isEditable});
+      this.isEditable,
+      this.index});
 
   final String id;
+  final int index;
   final String host;
   final String guest;
   final String hostFlag;
@@ -43,7 +46,9 @@ class Match extends StatelessWidget {
                 name: host,
                 flagImg: hostFlag,
                 isEditable: isEditable,
-                score: int.parse(result.split(":").first)),
+                score: int.parse(result.split(":").first),
+                onChange: (value) =>
+                    {Globals.scores["scoresTeam1"][index] = value}),
             isEditable
                 ? Text("vs")
                 : MatchInfo(result: result, date: date, hour: hour),
@@ -51,7 +56,9 @@ class Match extends StatelessWidget {
                 name: guest,
                 flagImg: guestFlag,
                 isEditable: isEditable,
-                score: int.parse(result.split(":").last)),
+                score: int.parse(result.split(":").last),
+                onChange: (value) =>
+                    {Globals.scores["scoresTeam2"][index] = value}),
             this.showOtherBets
                 ? GestureDetector(
                     child: Container(
@@ -62,7 +69,6 @@ class Match extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      print("Tapped on match");
                       //Got to detail page
                       Navigator.push(
                           context,

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ots/ots.dart';
 import 'api_provider.dart';
 import 'globals.dart';
 
@@ -16,10 +17,11 @@ class _LoginState extends State<Login> {
   void performLogin() {
     String username = _usernameController.text;
     String password = _passwordController.text;
-
+    showLoader(isModal: true);
     ApiProvider()
         .login(username, password)
         .then((response) => {
+              hideLoader(),
               if (response["isSuccess"])
                 {
                   Globals.username = response["user"]["email"],

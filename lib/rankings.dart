@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:ots/ots.dart';
 import 'api_provider.dart';
 import 'drawer.dart';
 
@@ -18,6 +19,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
 
   @override
   void afterFirstLayout(BuildContext context) {
+    showLoader(isModal: true);
     ApiProvider().getRanking().then((ranking) => setState(() {
           print(positions);
           positions = ranking['scores'];
@@ -27,21 +29,12 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
   @override
   Widget build(BuildContext context) {
     int count = 1;
-
     var data = positions.map((user) => {
           'name': user['user']['fullName'],
           'res': user['winner'].toString(),
           'mar': user['score'].toString(),
           'puntos': user['total'].toString()
         });
-
-    //print('data xd $data');
-
-    // var data = [
-    //   {'name': "German", 'res': "1", 'mar': "2", 'puntos': "3"},
-    //   {'name': "Santi", 'res': "0", 'mar': "2", 'puntos': "2"},
-    //   {'name': "Jose", 'res': "0", 'mar': "0", 'puntos': "1"}
-    // ];
 
     List<TableRow> rows = [
       TableRow(children: [
@@ -63,6 +56,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
         new Text(result["puntos"])
       ]));
     }
+    hideLoader();
     return new Scaffold(
         drawer: new MyDrawer(),
         appBar: AppBar(title: Text("Posiciones")),

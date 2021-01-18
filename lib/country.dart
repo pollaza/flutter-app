@@ -6,12 +6,14 @@ class Country extends StatefulWidget {
       {@required this.name,
       @required this.flagImg,
       @required this.isEditable,
-      @required this.score});
+      @required this.score,
+      this.onChange});
 
   final String name;
   final String flagImg;
   final bool isEditable;
   final int score;
+  final Function onChange;
 
   @override
   _CountryState createState() => _CountryState();
@@ -35,9 +37,7 @@ class _CountryState extends State<Country> {
                       maxValue: 100,
                       minValue: 0,
                       step: 1,
-                      onValue: (value) {
-                        print(value.toString());
-                      },
+                      onValue: widget.onChange,
                     )
                   : Container()
             ]));

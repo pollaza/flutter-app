@@ -50,6 +50,19 @@ class ApiProvider {
     return data;
   }
 
+  Future putBets(var ids, var teamScores1, var teamScores2) async {
+    final request = {
+      "matchId": ids,
+      "scoresTeam1": teamScores1,
+      "scoresTeam2": teamScores2
+    };
+    inspect(request);
+    final response = await _dio.post('/Bet', data: request);
+    Map responseMap = jsonDecode(response.toString());
+    inspect(response);
+    return responseMap["isSuccess"];
+  }
+
   Future<Map> getScores() async {
     final response = await _dio.get('/Phase/Results');
     return jsonDecode(response.toString());
