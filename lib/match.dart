@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pollaza/match_detail.dart';
@@ -47,8 +49,10 @@ class Match extends StatelessWidget {
                 flagImg: hostFlag,
                 isEditable: isEditable,
                 score: int.parse(result.split(":").first),
-                onChange: (value) =>
-                    {Globals.scores["scoresTeam1"][index] = value}),
+                onChange: (value) => {
+                      inspect(Globals.scores),
+                      Globals.scores["scoresTeam1"][index] = value
+                    }),
             isEditable
                 ? Text("vs")
                 : MatchInfo(result: result, date: date, hour: hour),
@@ -57,8 +61,10 @@ class Match extends StatelessWidget {
                 flagImg: guestFlag,
                 isEditable: isEditable,
                 score: int.parse(result.split(":").last),
-                onChange: (value) =>
-                    {Globals.scores["scoresTeam2"][index] = value}),
+                onChange: (value) => {
+                      inspect(Globals.scores),
+                      Globals.scores["scoresTeam2"][index] = value
+                    }),
             this.showOtherBets
                 ? GestureDetector(
                     child: Container(
