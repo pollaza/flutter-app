@@ -27,15 +27,15 @@ class ApiProvider {
   Future login(String username, String password) async {
     final request = {"username": username, "password": password};
     final response = await _dio.post('/Account/Login', data: request);
-    final cookies = response.headers.map['set-cookie'];
     Map responseMap = jsonDecode(response.toString());
 
-    print(responseMap["user"]["email"]);
-    if (cookies.isNotEmpty) {
-      final authToken = cookies[0].split(';')[0];
-
-      aToken = authToken;
-      print('token: $aToken');
+    if (responseMap["isSuccess"]) {
+      final cookies = response.headers.map['set-cookie'];
+      if (cookies.isNotEmpty) {
+        final authToken = cookies[0].split(';')[0];
+        aToken = authToken;
+        print('token: $aToken');
+      }
     }
     return responseMap;
   }

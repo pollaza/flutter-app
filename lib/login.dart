@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ots/ots.dart';
@@ -21,6 +23,7 @@ class _LoginState extends State<Login> {
     ApiProvider()
         .login(username, password)
         .then((response) => {
+              inspect(response),
               hideLoader(),
               if (response["isSuccess"])
                 {
@@ -29,7 +32,15 @@ class _LoginState extends State<Login> {
                   Navigator.pushNamed(context, 'home')
                 }
               else
-                {print("Login error")}
+                {
+                  showNotification(
+                    title: 'Error',
+                    message: 'Tu usuario o clave no son correctos',
+                    backgroundColor: Colors.redAccent,
+                    autoDismissible: true,
+                    notificationDuration: 2500,
+                  )
+                }
             })
         .catchError((err) => print(err));
   }
