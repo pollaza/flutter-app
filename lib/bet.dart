@@ -1,5 +1,10 @@
+import 'dart:developer';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'api_provider.dart';
 import 'drawer.dart';
 import 'match.dart';
 
@@ -12,42 +17,55 @@ class Bet extends StatefulWidget {
   _BetState createState() => _BetState();
 }
 
-class _BetState extends State<Bet> {
+class _BetState extends State<Bet> with AfterLayoutMixin<Bet> {
+  String phase = "";
+  var matches = [];
+  var predictions = {};
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    ApiProvider().getBets().then((response) => setState(() {
+          matches = response["matches"];
+          predictions = {
+            "team1": response["scoresTeam1"],
+            "team2": response["scoresTeam2"]
+          };
+          print(predictions);
+        }));
+  }
+
   @override
   Widget build(BuildContext context) {
+    //inspect(predictions);
+    var rows = <Widget>[];
+    int i = 0;
+    for (var match in matches) {
+      rows.add(
+        new Container(
+          child: Match(
+            id: match["sys"]["id"].toString(),
+            host: match["team1"]["title"].toString(),
+            guest: match["team2"]["title"].toString(),
+            hostFlag: match["team1"]["flag"].toString(),
+            guestFlag: match["team2"]["flag"].toString(),
+            result: predictions["team1"][i].toString() +
+                ":" +
+                predictions["team2"][i].toString(),
+            date:
+                DateFormat('yyyy-MM-dd').format(DateTime.parse(match["date"])),
+            hour: DateFormat(r'''HH'h'mm''')
+                .format(DateTime.parse(match["date"])),
+            predictions: [],
+            showOtherBets: false,
+            isEditable: true,
+          ),
+        ),
+      );
+      i++;
+    }
     return new Scaffold(
         drawer: new MyDrawer(),
         appBar: AppBar(title: Text("Predicciones")),
-        body: new Container(
-            margin: EdgeInsets.all(14),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
-                  child: Match(
-                    id: "123",
-                    host: 'Bolivia',
-                    guest: 'Argentina',
-                    hostFlag:
-                        '//ssl.gstatic.com/onebox/media/sports/logos/SGxeD7yhwPj53FmPBmMMHg_48x48.png',
-                    guestFlag:
-                        '//ssl.gstatic.com/onebox/media/sports/logos/1xBWyjjkA6vEWopPK3lIPA_48x48.png',
-                    date: '2020-10-13',
-                    hour: '15:00',
-                    result: '1:2',
-                    predictions: [],
-                    showOtherBets: false,
-                    isEditable: true,
-                  ),
-                ),
-                CupertinoButton.filled(
-                  child: Text('Guardar'),
-                  onPressed: () {
-                    /** Save Bets Action */
-                  },
-                ),
-              ],
-            )));
+        body: new ListView(children: rows));
   }
 }
