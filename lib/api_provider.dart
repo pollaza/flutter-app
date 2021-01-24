@@ -3,12 +3,13 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
+import 'globals.dart';
+
 class ApiProvider {
   Dio _dio;
   String aToken = '';
 
-  final BaseOptions options =
-      new BaseOptions(baseUrl: 'https://pollazatechtalk.azurewebsites.net');
+  final BaseOptions options = new BaseOptions(baseUrl: Globals.baseURL);
   static final ApiProvider _instance = ApiProvider._internal();
 
   factory ApiProvider() => _instance;
