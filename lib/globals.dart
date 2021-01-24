@@ -1,5 +1,6 @@
 class Globals {
-  static String baseURL = "https://pollazaapi.herokuapp.com";
+  static String baseURL = "https://pollazaapi.herokuapp.com/";
+  static String authToken = "";
 
   static var rootContext;
   static String username = "";

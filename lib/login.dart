@@ -23,7 +23,6 @@ class _LoginState extends State<Login> {
     ApiProvider()
         .login(username, password)
         .then((response) => {
-              inspect(response),
               hideLoader(),
               if (response["isSuccess"])
                 {
