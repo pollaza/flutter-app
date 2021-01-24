@@ -7,7 +7,6 @@ import 'globals.dart';
 
 class ApiProvider {
   Dio _dio;
-  String aToken = '';
 
   final BaseOptions options = new BaseOptions(baseUrl: Globals.baseURL);
   static final ApiProvider _instance = ApiProvider._internal();
@@ -19,7 +18,7 @@ class ApiProvider {
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (Options options) async {
       _dio.interceptors.requestLock.lock();
-      options.headers["cookie"] = aToken;
+      options.headers["Authorization"] = "Bearer " + Globals.authToken;
       _dio.interceptors.requestLock.unlock();
       return options;
     }));
@@ -29,14 +28,13 @@ class ApiProvider {
     final request = {"username": username, "password": password};
     final response = await _dio.post('/Account/Login', data: request);
     Map responseMap = jsonDecode(response.toString());
-
+    inspect(responseMap);
     if (responseMap["isSuccess"]) {
-      final cookies = response.headers.map['set-cookie'];
-      if (cookies.isNotEmpty) {
-        final authToken = cookies[0].split(';')[0];
-        aToken = authToken;
-        print('token: $aToken');
-      }
+      print("Login: success");
+      Globals.authToken = responseMap["token"];
+      print('token: ' + Globals.authToken);
+    } else {
+      print("Login: failed");
     }
     return responseMap;
   }
