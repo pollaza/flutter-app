@@ -12,11 +12,29 @@ class Profile extends StatelessWidget {
         body: Container(
             margin: EdgeInsets.all(14),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height * 0.75,
-                    child: Center(child: Text("Nombre: " + Globals.username))),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    new Container(
+                        width: 190.0,
+                        height: 190.0,
+                        decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: new DecorationImage(
+                                fit: BoxFit.fill,
+                                image: new NetworkImage(
+                                    "http:" + Globals.avatar)))),
+                  ],
+                ),
+                Row(children: [Text(" ")]),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Center(
+                      child: Text(Globals.username,
+                          style: new TextStyle(fontWeight: FontWeight.bold)))
+                ])
               ],
             )));
   }
