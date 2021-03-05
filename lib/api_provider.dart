@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
@@ -18,7 +17,8 @@ class ApiProvider {
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (Options options) async {
       _dio.interceptors.requestLock.lock();
-      options.headers["Authorization"] = "Bearer " + Globals.authToken;
+      options.headers["Authorization"] = Globals.authToken;
+      print("+Authorization: " + Globals.authToken);
       _dio.interceptors.requestLock.unlock();
       return options;
     }));
@@ -28,11 +28,10 @@ class ApiProvider {
     final request = {"username": username, "password": password};
     final response = await _dio.post('/Account/Login', data: request);
     Map responseMap = jsonDecode(response.toString());
-    inspect(responseMap);
     if (responseMap["isSuccess"]) {
       print("Login: success");
       Globals.authToken = responseMap["token"];
-      print('token: ' + Globals.authToken);
+      print('Authorization: ' + Globals.authToken);
     } else {
       print("Login: failed");
     }
@@ -55,10 +54,9 @@ class ApiProvider {
       "scoresTeam1": teamScores1,
       "scoresTeam2": teamScores2
     };
-    inspect(request);
+
     final response = await _dio.post('/Bet', data: request);
     Map responseMap = jsonDecode(response.toString());
-    inspect(response);
     return responseMap["isSuccess"];
   }
 
