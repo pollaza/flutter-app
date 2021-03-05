@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
               if (response["isSuccess"])
                 {
                   Globals.username = response["user"]["email"],
-                  Globals.avatar = response["user"]["photo"],
+                  Globals.avatar = response["user"]["photo"].toString(),
                   Globals.isLoggedIn = true,
                   Navigator.pushNamed(context, 'home')
                 }

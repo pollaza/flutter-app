@@ -62,8 +62,8 @@ class MyDrawer extends StatelessWidget {
                 ApiProvider().logout().then((value) => {
                       Globals.isLoggedIn = false,
                       Globals.username = "",
-                      //Navigator.of(context)
-                      //  .pushNamedAndRemoveUntil("login", (route) => false)
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil("/", (route) => false)
                     });
               }),
         ],
