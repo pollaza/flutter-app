@@ -64,7 +64,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
             decoration: new BoxDecoration(
                 shape: BoxShape.circle,
                 image: new DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.scaleDown,
                     image: new NetworkImage(result["photo"])))),
         Text(result["name"]),
         new Text(result["res"]),
