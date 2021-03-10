@@ -51,6 +51,10 @@ class _LoginState extends State<Login> {
         backgroundColor: CupertinoColors.white,
         child: Container(
           padding: EdgeInsets.all(20),
+          decoration: new BoxDecoration(
+              image: new DecorationImage(
+                  image: AssetImage('assets/field.jpg'),
+                  fit: BoxFit.fitHeight)),
           child: SafeArea(
               child: Form(
             key: _formKey,
@@ -58,18 +62,22 @@ class _LoginState extends State<Login> {
               children: [
                 Container(
                   margin: EdgeInsets.only(top: 40, bottom: 10),
-                  child: Text('Pollaza',
+                  child: Text('QATAR 2022',
                       style: TextStyle(
                           fontSize: 28,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           height: 1.6)),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
-                  child: Text('Venga venga, fresquitas las apuestas!'),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 18, color: Colors.amber),
+                  ),
                 ),
                 CupertinoTextField(
-                    placeholder: 'Username',
+                    placeholder: 'Usuario',
                     controller: _usernameController,
                     style: TextStyle(
                       fontSize: 16.0,
@@ -78,7 +86,7 @@ class _LoginState extends State<Login> {
                 Container(
                     margin: EdgeInsets.only(top: 12),
                     child: CupertinoTextField(
-                      placeholder: 'Password',
+                      placeholder: 'Contraseña',
                       obscureText: true,
                       controller: _passwordController,
                       style: TextStyle(

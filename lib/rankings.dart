@@ -61,6 +61,7 @@ class _RankingsState extends State<Rankings> with AfterLayoutMixin<Rankings> {
             width: 30.0,
             height: 30.0,
             padding: EdgeInsets.all(10.0),
+            margin: new EdgeInsets.symmetric(vertical: 10),
             decoration: new BoxDecoration(
                 shape: BoxShape.circle,
                 image: new DecorationImage(
