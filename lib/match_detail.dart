@@ -49,6 +49,7 @@ class MatchDetail extends StatelessWidget {
             width: 30.0,
             height: 30.0,
             padding: EdgeInsets.all(0),
+            margin: new EdgeInsets.symmetric(vertical: 10),
             decoration: new BoxDecoration(
                 shape: BoxShape.circle,
                 image: new DecorationImage(
